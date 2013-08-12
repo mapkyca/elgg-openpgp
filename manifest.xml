@@ -5,7 +5,7 @@
 	<version>1.0</version>
 	<category>enhancements</category>
 	<description>Provides functions to encrypt email, as well as a message handler for sending email. Users are given an opportunity, via their settings page, to upload their public key.  </description>
-	<website>https://github.com/mapkyca/elgg-openpgpg</website>
+	<website>https://github.com/mapkyca/elgg-openpgp</website>
 	<copyright>Marcus Povey 2013</copyright>
 	<license>GNU General Public License version 2</license>
 	<requires>
