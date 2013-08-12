@@ -32,6 +32,7 @@ What this doesn't do
 Todo
 ----
 * [] Key server lookup and submission to better handle key exchange
+* [] Incoming email decryption & Jettmail support
 
 See
 ---
