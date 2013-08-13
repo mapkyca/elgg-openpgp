@@ -7,8 +7,8 @@
     
     <p><?php echo elgg_echo('elgg-openpgp:settings:openpgp_enable_handler'); ?>:<br />
         <select name='params[openpgp_enable_handler]'>
-            <option value="yes"><?= elgg_echo('option:yes'); ?></option>
-            <option value="no"><?= elgg_echo('option:no'); ?></option>
+            <option value="yes" <?php echo $vars['entity']->openpgp_enable_hander == 'yes' ? 'selected' : ''; ?>><?= elgg_echo('option:yes'); ?></option>
+            <option value="no" <?php echo $vars['entity']->openpgp_enable_hander == 'no' ? 'selected' : ''; ?>><?= elgg_echo('option:no'); ?></option>
         </select>
     </p>
 </div>
