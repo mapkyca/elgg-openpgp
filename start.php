@@ -21,19 +21,20 @@ elgg_register_event_handler('init', 'system', function() {
             $CONFIG->openpgp_enable_handler = false;
     
     // Override the email handler
-    register_notification_handler("email", function (ElggEntity $from, ElggUser $to, $subject, $message, array $params = NULL) {
+    if ($CONFIG->openpgp_enable_handler) {
+        register_notification_handler("email", function (ElggEntity $from, ElggUser $to, $subject, $message, array $params = NULL) {
 
-	global $CONFIG;
+            global $CONFIG;
 
-	if ($CONFIG->openpgp_enable_handler) {
             if ($encrypted = elgg_openpgp_encrypt ($message, $to))
                     $message = $encrypted;
-        }
-                
-        //elgg_log("OPENPGP: Sending message $message");
+
+            //elgg_log("OPENPGP: Sending message $message");
+
+            return email_notify_handler($from, $to, $subject, $message, $params);
+        });
+    }
         
-	return email_notify_handler($from, $to, $subject, $message, $params);
-    });
 });
 
 /**
