@@ -18,6 +18,14 @@ mkdir /var/www/.gnupg; chown www-data:www-data /var/www/.gnupg
 
 Note, we assume the server is "trusted", and while we aren't (at the moment) storing any private keys in this keychain, you should probably take extra steps to secure this directory.
 
+If you do have the .gnupg directory in its default directory (which is usually web readable) then I strongly recommend you deny access in your httpd.conf file with something like:
+```
+<Directorymatch "^/.*/\.gnupg/">
+Order deny,allow
+Deny from all
+</Directorymatch>
+```
+
 * Users can then enable encryption of messages sent to them by uploading their public key to Settings -> Configure your tools. As a network operator, you should encourage them to do so.
 
 What this does do
