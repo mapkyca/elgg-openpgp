@@ -11,4 +11,8 @@
             <option value="no" <?php echo $vars['entity']->openpgp_enable_handler == 'no' ? 'selected' : ''; ?>><?= elgg_echo('option:no'); ?></option>
         </select>
     </p>
+    
+    <p><?php echo elgg_echo('elgg-openpgp:settings:keyserver'); ?>:<br />
+            <?php echo elgg_view('input/text', array('name' => 'params[keyserver]', 'value' => $vars['entity']->keyserver ? $vars['entity']->keyserver : 'pgp.mit.edu')); ?>
+    </p>
 </div>
