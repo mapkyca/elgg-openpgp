@@ -59,7 +59,10 @@ function elgg_openpgp_encrypt($data, $user = null) {
         elgg_log("Looking up PK for {$user->email} from keyserver...");
         elgg_set_plugin_user_setting('publickey_server_lookup', time(), $user_guid, 'elgg-openpgp');
         $pk = elgg_pgp_keyserver_lookup($user->email);
-        if ($pk) elgg_log('Got key!');
+        if ($pk) {
+            elgg_log('Got key!');
+            elgg_set_plugin_user_setting('publickey', $pk, $user_guid, 'elgg-openpgp');
+        }
     }
 
     if (!$pk)
