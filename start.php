@@ -51,7 +51,16 @@ function elgg_openpgp_encrypt($data, $user = null) {
     $saved_ts = elgg_get_plugin_user_setting('gnupgp_pk_saved', $user_guid, 'elgg-openpgp');
     $imported_ts = elgg_get_plugin_user_setting('gnupgp_pk_imported', $user_guid, 'elgg-openpgp');
     $pk = elgg_get_plugin_user_setting('publickey', $user_guid, 'elgg-openpgp');
+    $pk_server_lookup = elgg_get_plugin_user_setting('publickey_server_lookup', $user_guid, 'elgg-openpgp');
     $gpg = elgg_get_plugin_setting('gnupgp', 'elgg-openpgp');
+    
+    if ((!$pk) && ($pk_server_lookup < time() - 604800))
+    {
+        elgg_log("Looking up PK for {$user->email} from keyserver...");
+        elgg_set_plugin_user_setting('publickey_server_lookup', time(), $user_guid, 'elgg-openpgp');
+        $pk = elgg_pgp_keyserver_lookup($user->email);
+        if ($pk) elgg_log('Got key!');
+    }
 
     if (!$pk)
         return false;
